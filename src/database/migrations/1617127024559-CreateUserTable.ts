@@ -72,7 +72,7 @@ export class CreateUserTable1617127024559 implements MigrationInterface {
                         default: "now()"
                     },
                     {
-                        name: "update_at",
+                        name: "updated_at",
                         type: "timestamp",
                         isNullable: true,
                     }

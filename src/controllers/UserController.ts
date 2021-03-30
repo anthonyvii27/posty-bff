@@ -8,7 +8,15 @@ export class UserController {
     }
     
     async create(req: Request, res: Response) {
-        const { email, name, password } = req.body;
+        const { 
+            username,
+            email, 
+            password,
+            first_name,
+            last_name,
+            country,
+            birthdate
+        } = req.body;
      
         const userRepository = getCustomRepository(UsersRepository);
         
@@ -20,10 +28,18 @@ export class UserController {
             });
         }
 
-        const user = await userRepository.create({ email, password, name });
+        const user = await userRepository.create({ 
+            username, 
+            email, 
+            password, 
+            first_name, 
+            last_name,
+            country, 
+            birthdate 
+        });
         
         await userRepository.save(user);
 
-        return res.json(user)
+        return res.json(user);
     }
 }
