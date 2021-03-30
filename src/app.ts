@@ -3,11 +3,13 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 
+import './database';
 import { router } from './routes';
+import { ApplicationEnvironment } from './settings/settings';
 
 dotenv.config();
 
-if (!process.env.PORT) {
+if (!ApplicationEnvironment.Port) {
     process.exit(1);
 }
 
