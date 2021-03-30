@@ -1,8 +1,9 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from "typeorm";
 import bcrypt from 'bcryptjs';
+import { IUser } from "../interfaces/IUser";
 
 @Entity("user")
-class User {
+class User implements IUser {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 

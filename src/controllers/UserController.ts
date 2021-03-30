@@ -28,7 +28,7 @@ export class UserController {
             });
         }
 
-        const user = await userRepository.create({ 
+        const user = { 
             username, 
             email, 
             password, 
@@ -36,10 +36,9 @@ export class UserController {
             last_name,
             country, 
             birthdate 
-        });
-        
-        await userRepository.save(user);
+        };
 
-        return res.json(user);
+        const entity = await userRepository.createAndSave(user);
+        return res.json(entity);
     }
 }
