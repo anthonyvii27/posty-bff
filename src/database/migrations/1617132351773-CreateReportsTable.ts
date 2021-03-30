@@ -12,7 +12,7 @@ export class CreateReportsTable1617132351773 implements MigrationInterface {
                         isPrimary: true,
                     },
                     {
-                        name: 'id_user',
+                        name: 'userId',
                         type: 'varchar',
                     },
                     {
@@ -28,7 +28,7 @@ export class CreateReportsTable1617132351773 implements MigrationInterface {
                 foreignKeys: [
                     {
                         name: 'user_fk',
-                        columnNames: ['id_user'],
+                        columnNames: ['userId'],
                         referencedColumnNames: ['id'],
                         referencedTableName: 'user',
                     }
