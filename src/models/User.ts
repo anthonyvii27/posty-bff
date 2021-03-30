@@ -7,16 +7,43 @@ class User {
     id: string;
 
     @Column()
+    username: string;
+
+    @Column()
     email: string;
+
+    @Column()
+    email_verified: boolean;
 
     @Column()
     password: string;
 
     @Column()
-    name: string;
+    first_name: string;
+
+    @Column()
+    last_name: string;
+
+    @Column()
+    photo_url: string;
+
+    @Column()
+    bio: string;
+
+    @Column()
+    country: string;
+
+    @Column()
+    link: string;
+
+    @Column()
+    birthdate: Date;
 
     @CreateDateColumn()
     created_at: Date;
+
+    @CreateDateColumn()
+    updated_at: Date;
 
     @BeforeInsert()
     @BeforeUpdate()
