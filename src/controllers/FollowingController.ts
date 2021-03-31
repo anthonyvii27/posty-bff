@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { IGetUser } from '../interfaces/IUser';
 import { FollowRepository } from '../repository/FollowRepository';
@@ -21,58 +21,43 @@ export class FollowingController {
         }
 
         const entity = await followRepository.createAndSave(follow);
+        
         return res.json(entity);
     }
 
-    async getFollowingListByUserLogged(req: Request, res: Response) {
-        const followRepository = getCustomRepository(FollowRepository);
-        const userRepository = getCustomRepository(UsersRepository);
+    async getFollowingListByUserLogged(req: Request, res: Response, next: NextFunction) {
+        try {
+            const userRepository = getCustomRepository(UsersRepository);
 
-        const followingList = await followRepository.find({ follower_id: req.userId });
+            const followingList: IGetUser = await userRepository.query(`
+                SELECT id, username, first_name, last_name, photo_url FROM public."user"
+                JOIN follow ON follower_id=$1
+                WHERE id=following_id
+            `, [req.userId]); 
+    
+            return res.json(followingList);
 
-        let followingListFormatted = [];
-
-        for(let item of followingList) {
-            const { following_id } = item;
-            const user = await userRepository.findOne({ id: following_id });
-
-            const formattedUser: IGetUser = {
-                username: user?.username,
-                first_name: user?.first_name,
-                last_name: user?.last_name,
-                photo_url: user?.photo_url,
-            }
-
-            followingListFormatted.push(formattedUser);
+        } catch(error) {
+            next(error);
         }
-
-        return res.json(followingListFormatted);
     }
 
-    async getFollowingListBySpecificUser(req: Request, res: Response) {
-        const followRepository = getCustomRepository(FollowRepository);
-        const userRepository = getCustomRepository(UsersRepository);
+    async getFollowingListBySpecificUser(req: Request, res: Response, next: NextFunction) {
+        try {
+            const userRepository = getCustomRepository(UsersRepository);
 
-        const { follower_id } = req.params;
+            const { follower_id } = req.params;
+    
+            const followingList: IGetUser = await userRepository.query(`
+                SELECT id, username, first_name, last_name, photo_url FROM public."user"
+                JOIN follow ON follower_id=$1
+                WHERE id=following_id
+            `, [follower_id]);
+    
+            return res.json(followingList);
 
-        const followingList = await followRepository.find({ follower_id });
-
-        let followingListFormatted = [];
-
-        for(let item of followingList) {
-            const { following_id } = item;
-            const user = await userRepository.findOne({ id: following_id });
-
-            const formattedUser: IGetUser = {
-                username: user?.username,
-                first_name: user?.first_name,
-                last_name: user?.last_name,
-                photo_url: user?.photo_url
-            }
-
-            followingListFormatted.push(formattedUser);
+        } catch(error) {
+            next(error);
         }
-
-        return res.json(followingListFormatted);
     }
 }
