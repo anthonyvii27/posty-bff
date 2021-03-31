@@ -1,16 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { User } from './User';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { IReport } from "../interfaces/IReport";
 
 @Entity("report")
-class Report {
+class Report implements IReport {
     @PrimaryGeneratedColumn()
     id: string;
 
     @Column()
     userId: string;
-
-    // @ManyToOne(() => User, user => user.id)
-    // user: User;
 
     @Column()
     content: string;

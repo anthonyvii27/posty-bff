@@ -9,10 +9,9 @@ export class ReportController {
 
         const reportRepository = getCustomRepository(ReportsRepository);
 
-        const report = reportRepository.create({ content, userId });
+        const report = { content, userId };
+        const entity = await reportRepository.createAndSave(report);
 
-        await reportRepository.save(report);
-
-        return res.json(report);
+        return res.json(entity);
     }
 }
