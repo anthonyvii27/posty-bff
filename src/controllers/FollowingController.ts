@@ -5,25 +5,31 @@ import { FollowRepository } from '../repository/FollowRepository';
 import { UsersRepository } from '../repository/UserRepository';
 
 export class FollowingController {
-    async create(req: Request, res: Response) {
-        const followRepository = getCustomRepository(FollowRepository);
-        const { following_id } = req.body;
-        const follower_id = req.userId;
+    async create(req: Request, res: Response, next: NextFunction) {
+        try {
+            const followRepository = getCustomRepository(FollowRepository);
 
-        const follow = { following_id, follower_id };
+            const { following_id } = req.body;
+            const follower_id = req.userId;
+            const follow = { following_id, follower_id };
 
-        const followAlreadyExists = await followRepository.findOne({ following_id, follower_id });
+            const followAlreadyExists = await followRepository.findOne({ following_id, follower_id });
 
-        if(followAlreadyExists) {
-            return res.status(409).json({
-                error: "User already followed!"
-            });
+            if(followAlreadyExists) {
+                return res.status(409).json({
+                    error: "User already followed!"
+                });
+            }
+
+            const entity = await followRepository.createAndSave(follow);
+
+            return res.json(entity);
+
+        } catch(error) {
+            next(error);
         }
-
-        const entity = await followRepository.createAndSave(follow);
-        
-        return res.json(entity);
     }
+
 
     async getFollowingListByUserLogged(req: Request, res: Response, next: NextFunction) {
         try {
@@ -41,6 +47,7 @@ export class FollowingController {
             next(error);
         }
     }
+    
 
     async getFollowingListBySpecificUser(req: Request, res: Response, next: NextFunction) {
         try {
