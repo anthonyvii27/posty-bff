@@ -16,4 +16,4 @@ class Report implements IReport {
     created_at: Date;
 }
 
-export { Report }
+export { Report };

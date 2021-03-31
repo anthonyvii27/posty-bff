@@ -10,4 +10,4 @@ class ReportsRepository extends Repository<Report> {
     }
 }
 
-export { ReportsRepository }
+export { ReportsRepository };
