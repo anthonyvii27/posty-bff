@@ -1,5 +1,5 @@
 import { EntityRepository, Repository } from "typeorm";
-import { INewFollow, IFollow } from "../interfaces/IFollow";
+import { INewFollow, IFollow, IFollowingList } from "../interfaces/IFollow";
 import { Follow } from "../models/Follow";
 
 @EntityRepository(Follow)

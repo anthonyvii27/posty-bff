@@ -8,3 +8,7 @@ export interface INewFollow {
     following_id: string;
     follower_id: string;
 }
+
+export interface IFollowingList {
+    following_id: string;
+}

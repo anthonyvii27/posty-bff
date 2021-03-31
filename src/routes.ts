@@ -18,7 +18,7 @@ router.post('/authenticate', authController.authenticate);
 
 router.post('/report', authMiddleware, reportController.create);
 
-router.get('/follow', authMiddleware, followingController.getFollowingListByLoggedUser);
+router.get('/follow', authMiddleware, followingController.getFollowingListByUserLogged);
 router.get('/follow/:follower_id', authMiddleware, followingController.getFollowingListBySpecificUser)
 router.post('/follow', authMiddleware, followingController.create);
 

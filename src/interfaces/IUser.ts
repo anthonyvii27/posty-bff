@@ -36,3 +36,10 @@ export interface IUpdateUser {
     link?: string;
     email_verified?: boolean;
 }
+
+export interface IGetUser {
+    username?: string;
+    first_name?: string;
+    last_name?: string;
+    photo_url?: string;
+}
