@@ -2,14 +2,13 @@
   "name": "posty",
   "version": "1.0.0",
   "main": "server",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
   },
   "keywords": [],
   "author": "Anthony Vinicius <anthony.vii27@gmail.com>",
-  "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -19,7 +18,8 @@
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.31",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

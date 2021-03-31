@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { UsersRepository } from '../repository/UserRepository';
 
@@ -7,38 +7,43 @@ export class UserController {
         res.send({ userID: req.userId })
     }
     
-    async create(req: Request, res: Response) {
-        const { 
-            username,
-            email, 
-            password,
-            first_name,
-            last_name,
-            country,
-            birthdate
-        } = req.body;
-     
-        const userRepository = getCustomRepository(UsersRepository);
+    async create(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { 
+                username,
+                email, 
+                password,
+                first_name,
+                last_name,
+                country,
+                birthdate
+            } = req.body;
         
-        const userAlreadyExists = await userRepository.findOne({ email });
-        
-        if(userAlreadyExists) {
-            return res.status(409).json({
-                error: "User already exists!"
-            });
+            const userRepository = getCustomRepository(UsersRepository);
+            
+            const userAlreadyExists = await userRepository.findOne({ email });
+            
+            if(userAlreadyExists) {
+                return res.status(409).json({
+                    error: "User already exists!"
+                });
+            }
+
+            const user = { 
+                username, 
+                email, 
+                password, 
+                first_name, 
+                last_name,
+                country, 
+                birthdate 
+            };
+
+            const entity = await userRepository.createAndSave(user);
+
+            res.json(entity);
+        } catch(error) {
+            next(error);
         }
-
-        const user = { 
-            username, 
-            email, 
-            password, 
-            first_name, 
-            last_name,
-            country, 
-            birthdate 
-        };
-
-        const entity = await userRepository.createAndSave(user);
-        return res.json(entity);
     }
 }
