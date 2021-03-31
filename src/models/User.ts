@@ -7,7 +7,7 @@ class User implements IUser {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
+    @Column("varchar", { length: 30 })
     username: string;
 
     @Column()
@@ -28,7 +28,7 @@ class User implements IUser {
     @Column()
     photo_url: string;
 
-    @Column()
+    @Column("varchar", { length: 200 })
     bio: string;
 
     @Column()

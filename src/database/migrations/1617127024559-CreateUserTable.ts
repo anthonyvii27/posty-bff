@@ -54,8 +54,7 @@ export class CreateUserTable1617127024559 implements MigrationInterface {
                     },
                     {
                         name: "country",
-                        type: "varchar",
-                        length: '50'
+                        type: "varchar"
                     },
                     {
                         name: "link",
