@@ -1,7 +1,7 @@
 import { CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
-@Entity("followers")
-class Follower {
+@Entity("follow")
+class Follow {
     @PrimaryColumn()
     follower_id: string;
 
@@ -12,4 +12,4 @@ class Follower {
     created_at: Date;
 }
 
-export { Follower };
+export { Follow };

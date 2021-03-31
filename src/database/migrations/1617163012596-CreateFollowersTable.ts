@@ -4,7 +4,7 @@ export class CreateFollowersTable1617163012596 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         queryRunner.createTable(
             new Table({
-                name: 'followers',
+                name: 'follow',
                 columns: [
                     {
                         name: 'follower_id',
