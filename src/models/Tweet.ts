@@ -1,13 +1,8 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { ITweet } from "../interfaces/ITweet";
 
-export enum Origin {
-    TWEET = "tweet",
-    RETWEET = "retweet",
-}
-
-@Entity("report")
-class Report implements ITweet {
+@Entity("tweets")
+class Tweet implements ITweet {
     @PrimaryGeneratedColumn()
     id: string;
 
@@ -17,11 +12,8 @@ class Report implements ITweet {
     @Column()
     image_content_url: string;
 
-    @Column({
-        type: "enum",
-        enum: Origin
-    })
-    origin: Origin          
+    @Column()
+    origin: string;        
                    
     @Column()
     user_id: string;
@@ -30,4 +22,4 @@ class Report implements ITweet {
     created_at: Date;
 }
 
-export { Report }
+export { Tweet }
