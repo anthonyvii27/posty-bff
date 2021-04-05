@@ -25,6 +25,7 @@ router.get('/follow/:follower_id', authMiddleware, followingController.getFollow
 router.post('/follow', authMiddleware, followingController.create);
 
 router.get('/tweet', authMiddleware, tweetController.getTweetsByUserLogged);
+router.get('/tweet/:user_id', authMiddleware, tweetController.getTweetsBySpecificUser);
 router.post('/tweet', authMiddleware, tweetController.create);
 
 export { router };
