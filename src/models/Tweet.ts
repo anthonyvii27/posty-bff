@@ -4,7 +4,7 @@ import { ITweet } from "../interfaces/ITweet";
 @Entity("tweets")
 class Tweet implements ITweet {
     @PrimaryGeneratedColumn()
-    id: string;
+    tweet_id: string;
 
     @Column()
     text_content: string;

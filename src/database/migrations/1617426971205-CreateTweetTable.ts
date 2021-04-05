@@ -7,7 +7,7 @@ export class CreateTweetTable1617426971205 implements MigrationInterface {
                 name: "tweets",
                 columns: [
                     {
-                        name: 'id',
+                        name: 'tweet_id',
                         type: 'serial',
                         isPrimary: true,
                     },

@@ -1,5 +1,5 @@
 export interface ITweet {
-    id: string;
+    tweet_id: string;
     text_content?: string;
     image_content_url?: string;
     origin: string;
