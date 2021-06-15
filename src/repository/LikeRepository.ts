@@ -1,12 +1,17 @@
 import { EntityRepository, Repository } from "typeorm";
-import { INewLike, ILike } from "../interfaces/ILike";
+import { INewLike, ILike, IUnlike } from "../interfaces/ILike";
 import { Like } from "../models/Like";
 
 @EntityRepository(Like)
 class LikeRepository extends Repository<Like> {
-    createAndSave(like: INewLike): Promise<ILike> {
-        const entity = this.create(like);
-        return this.save(entity);
+    async createAndSave(like: INewLike): Promise<ILike> {
+        const entity = await this.create(like);
+        return await this.save(entity);
+    }
+
+    async unlike(like: IUnlike): Promise<void> {
+        const entity = await this.findOne(like);
+        await this.remove(entity);
     }
 }
 

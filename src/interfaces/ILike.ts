@@ -8,3 +8,8 @@ export interface INewLike {
     tweet_id: string;
     user_id: string;
 }
+
+export interface IUnlike {
+    tweet_id: string;
+    user_id: string;
+}

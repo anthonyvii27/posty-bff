@@ -17,10 +17,8 @@ export class LikeController {
             const likeAlreadyExists = await likeRepository.findOne(like);
 
             if(likeAlreadyExists) {
-                console.log('descurtir');
-                // return res.status(409).json({
-                //     error: "User already followed!"
-                // });
+                likeRepository.unlike(like);
+                return res.send('Unlike ok');
             }
 
             const entity = await likeRepository.createAndSave(like);
