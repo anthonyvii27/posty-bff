@@ -1,9 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
-import { INewLike } from '../interfaces/ILike';
-import { IGetUser } from '../interfaces/IUser';
 import { LikeRepository } from '../repository/LikeRepository';
-import { UsersRepository } from '../repository/UserRepository';
 
 export class LikeController {
     async create(req: Request, res: Response, next: NextFunction) {
@@ -18,7 +15,7 @@ export class LikeController {
 
             if(likeAlreadyExists) {
                 likeRepository.unlike(like);
-                return res.send('Unlike ok');
+                return res.status(200).json({ message: 'Successfully disliked' });
             }
 
             const entity = await likeRepository.createAndSave(like);
